@@ -22,7 +22,13 @@
     <main class="main-content">
       <header class="header">
         <input type="text" placeholder="search a feature or a sub-features" />
-        <div class="country-flag">🇷🇼 ⌄</div>
+        <div class="country-dropdown" id="country-dropdown">
+          <div class="country-flag" id="selected-country" style="cursor:pointer;">🇷🇼 ⌄</div>
+          <div class="dropdown-list" id="dropdown-list" style="display:none; position:absolute; background:#fff; border:1px solid #ccc; border-radius:4px; margin-top:5px; z-index:10;">
+            <div class="dropdown-item" data-country="rwanda" style="padding:8px; cursor:pointer;">🇷🇼 Rwanda</div>
+            <div class="dropdown-item" data-country="nigeria" style="padding:8px; cursor:pointer;">🇳🇬 Nigeria</div>
+          </div>
+        </div>
       </header>
 
       <section class="welcome-section">
@@ -95,6 +101,34 @@
     document.getElementById("pay-btn").onclick = (e) => {
       e.preventDefault();
       document.getElementById("success-message").style.display = "block";
+    };
+
+    // Country dropdown logic
+    const selectedCountry = document.getElementById("selected-country");
+    const dropdownList = document.getElementById("dropdown-list");
+
+    selectedCountry.onclick = (e) => {
+      dropdownList.style.display = dropdownList.style.display === "block" ? "none" : "block";
+      e.stopPropagation();
+    };
+
+    document.querySelectorAll(".dropdown-item").forEach(item => {
+      item.onclick = (e) => {
+        const country = e.target.getAttribute("data-country");
+        if (country === "rwanda") {
+          selectedCountry.innerHTML = "🇷🇼 ⌄";
+        } else if (country === "nigeria") {
+          selectedCountry.innerHTML = "🇳🇬 ⌄";
+        }
+        dropdownList.style.display = "none";
+        // You can add logic here to change the site language/currency/etc.
+        e.stopPropagation();
+      };
+    });
+
+    // Hide dropdown when clicking outside
+    document.body.onclick = () => {
+      dropdownList.style.display = "none";
     };
   </script>
 </body>

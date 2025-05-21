@@ -24,16 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
   // Sidebar toggle for mobile
   const menuToggle = document.getElementById('menu-toggle');
   const sidebar = document.getElementById('sidebar');
-  const sidebarOverlay = document.getElementById('sidebar-overlay');
+  const overlay = document.getElementById('sidebar-overlay');
 
+  // Show sidebar
   menuToggle.addEventListener('click', function() {
     sidebar.classList.add('open');
-    sidebarOverlay.style.display = 'block';
+    overlay.style.display = 'block';
   });
 
-  sidebarOverlay.addEventListener('click', function() {
+  // Hide sidebar when overlay is clicked
+  overlay.addEventListener('click', function() {
     sidebar.classList.remove('open');
-    sidebarOverlay.style.display = 'none';
+    overlay.style.display = 'none';
+  });
+
+  // Hide sidebar when a nav link is clicked (for mobile)
+  sidebar.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function() {
+      sidebar.classList.remove('open');
+      overlay.style.display = 'none';
+    });
   });
 
   // Feature search logic
@@ -92,6 +102,37 @@ document.addEventListener('DOMContentLoaded', function() {
         successMessage.textContent = "";
       }, 3000);
       form.reset();
+    }
+  });
+
+  // Existing modal logic for "Activate account now"
+  const activateBtn = document.querySelector('.activate-btn');
+  const getStartedBtn = document.querySelector('.get-started');
+  const modal = document.getElementById('activation-modal');
+  const closeModal = document.getElementById('close-modal');
+
+  if (activateBtn) {
+    activateBtn.addEventListener('click', function() {
+      modal.style.display = 'flex'; // Use 'flex' to enable centering
+    });
+  }
+
+  if (getStartedBtn) {
+    getStartedBtn.addEventListener('click', function() {
+      modal.style.display = 'flex'; // Use 'flex' to enable centering
+    });
+  }
+
+  if (closeModal) {
+    closeModal.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+  }
+
+  // Optional: Close modal when clicking outside content
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
     }
   });
 });

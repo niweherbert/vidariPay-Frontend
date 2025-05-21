@@ -63,10 +63,23 @@ body, html {
   background: white;
 }
 
+.topbar-logo {
+  padding-top: 20px;
+  height: 70px;
+  margin: 0 1rem;
+  display: block;
+}
+
+/* Hide topbar logo on screens wider than 600px */
+.topbar-logo {
+  display: none;
+}
+
 .topbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .search {
@@ -162,11 +175,15 @@ body, html {
   font-weight: bold;
 }
 
-/* ...existing code... */
+/* Country Select Styles */
 .country-select {
   position: relative;
   display: inline-block;
   cursor: pointer;
+  margin-left: auto;
+  /* Ensures it stays at the right end */
+  display: flex;
+  align-items: center;
 }
 .dropdown-icon {
   margin-left: 8px;
@@ -176,7 +193,7 @@ body, html {
 .country-dropdown {
   position: absolute;
   top: 110%;
-  left: 0;
+  right: 0;
   background: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -196,6 +213,44 @@ body, html {
   width: 24px;
   margin-right: 8px;
 }
+
+/* Modal Overlay Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  text-align: center;
+}
+.close-modal {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.google-signin-btn {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+}
+
 /* Hide menu icon on desktop */
 .menu-toggle {
   display: none;
@@ -209,35 +264,83 @@ body, html {
   cursor: pointer;
 }
 
-/* Responsive styles */
+/* Hide sidebar by default on small screens */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
-    left: -260px;
+    left: 0;
     top: 0;
-    width: 240px;
     height: 100%;
+    width: 250px;
     background: #fff;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.08);
-    z-index: 1000;
-    transition: left 0.3s;
-    padding-top: 60px;
+    z-index: 1001;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
   }
   .sidebar.open {
-    left: 0;
+    transform: translateX(0);
   }
-  .menu-toggle {
-    display: block;
-  }
-  .main-content {
-    margin-left: 0 !important;
-  }
-  /* Optional: dark overlay when menu is open */
   .sidebar-overlay {
-    display: block;
+    display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(0,0,0,0.3);
-    z-index: 999;
+    z-index: 1000;
+  }
+  .sidebar.open ~ .sidebar-overlay {
+    display: block !important;
+  }
+  .menu-toggle {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}
+
+/* Hide menu-toggle on desktop */
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
+  .sidebar {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    width: 220px;
+  }
+  .sidebar-overlay {
+    display: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .search {
+    display: none;
+  }
+  .topbar {
+    justify-content: center;
+    position: relative;
+  }
+  .topbar-logo {
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  .country-select {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0;
   }
 }
