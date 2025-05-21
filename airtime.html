@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buy Airtime - Vidaripay</title>
+  <link rel="stylesheet" href="airtimestyle.css"/>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">&#9776;</button>
+    <aside class="sidebar" id="sidebar">
+      <div class="logo">
+        <img src="logo-transparent.png" alt="Vidaripay Logo">
+      </div>
+      <nav>
+        
+        <a href="#" class="active">Buy Airtime</a>
+        
+        <a href="giftcard.html">GiftCard</a>
+        <a href="payment.html">Payments</a>
+      </nav>
+      <button class="get-started">Get Started</button>
+    </aside>
+    <div class="sidebar-overlay" id="sidebar-overlay" style="display:none;"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="topbar">
+        <input type="text" placeholder="Search a feature or a sub-feature" class="search" id="feature-search"/>
+        <div class="country-select">
+          <span class="dropdown-icon">&#9662;</span>
+          <img id="selected-flag" src="https://flagcdn.com/w320/rw.png" alt="Rwanda" class="flag"/>
+          <div class="country-dropdown" id="country-dropdown" style="display: none;">
+            <div class="country-option" data-flag="https://flagcdn.com/w320/rw.png" data-country="Rwanda">
+              <img src="https://flagcdn.com/w320/rw.png" alt="Rwanda" class="flag"/> Rwanda
+            </div>
+            <div class="country-option" data-flag="https://flagcdn.com/w320/ng.png" data-country="Nigeria">
+              <img src="https://flagcdn.com/w320/ng.png" alt="Nigeria" class="flag"/> Nigeria
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="search-result" style="color: red; margin-top: 10px; text-align:center;"></div>
+
+      <div class="notification-box">
+        <strong>Activate your account to get the History</strong>
+        <p>finish setting up your account and receive payments</p>
+        <button class="activate-btn">Activate account now</button>
+      </div>
+
+      <section class="airtime-form">
+        <h2>Let’s get started</h2>
+        <div class="card">
+          <h3>Ready to purchase</h3>
+          <form>
+  <input type="tel" id="phone-input" placeholder="Enter number" required />
+  <input type="number" placeholder="Amount" required />
+  <button type="submit">BUY AIRTIME</button>
+</form>
+          <div id="success-message"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="airtimescript.js"></script>
+</body>
+</html>

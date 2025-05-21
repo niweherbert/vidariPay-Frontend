@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giftcard Selection</title>
+  <link rel="stylesheet" href="giftcardstyle.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px;
+      background-color: #003524;
+      color: white;
+      height: 100vh;
+      padding: 1rem;
+    }
+
+    .sidebar h2 {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+
+    /* Remove link underline and blue color in sidebar */
+    .sidebar a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+
+    .main h1 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .giftcard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+    }
+
+    .giftcard {
+      padding: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      color: white;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .giftcard .icon {
+      font-size: 2rem;
+      margin-bottom: auto;
+    }
+
+    .giftcard h3 {
+      margin: 0.5rem 0 0;
+      font-size: 1.2rem;
+    }
+
+    .giftcard p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* Brand Colors */
+    .itunes { background-color: #3c332a; }
+    .amazon { background-color: #66ccff; }
+    .dribbble { background-color: #ffa500; }
+    .netflix { background-color: #808080; }
+
+    /* Modal Overlay */
+    .giftcard-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .giftcard-modal {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      width: 300px;
+      position: relative;
+      text-align: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      border: none;
+      background: transparent;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .giftcard-card {
+      border-radius: 12px;
+      color: white;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-label {
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .quantity button {
+      padding: 0.4rem 0.8rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .buy-btn {
+      background-color: #3c332a;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .sidebar a.active {
+  color: #00c853; /* Green color */
+  font-weight: bold;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <img src="logo-transparent.png" alt="Vidaripay Logo" class="logo" />
+    <ul>
+      <a href="airtime.html"><li>Buy Airtime</li></a>
+      <a href="#" class="active"><li>Giftcard</li></a>
+      <a href="payment.html"><li>Payment</li></a>
+      
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>Giftcard Selection</h1>
+    <div class="giftcard-grid">
+      <div class="giftcard itunes" data-brand="iTunes" data-price="100" data-color="#3c332a">
+        <div class="icon">
+          <img src="Apple_logo_black.svg" alt="Apple Logo" style="width: 2.5rem; height: 2.5rem;" />
+        </div>
+        <h3>iTunes</h3>
+        <p>$100</p>
+      </div>
+      <div class="giftcard amazon" data-brand="Amazon" data-price="100" data-color="#66ccff">
+        <div class="icon">
+          <img src="Amazon_(company)-Logo.wine.png" alt="Amazon Logo" style="width: 2.5rem; height: 2.5rem;" />
+        </div>
+        <h3>Amazon</h3>
+        <p>$100</p>
+      </div>
+      <div class="giftcard dribbble" data-brand="Dribbble" data-price="100" data-color="#ffa500">
+        <div class="icon">
+          <img src="dribbble.svg" alt="Dribbble Logo" style="width: 2.5rem; height: 2.5rem;" />
+        </div>
+        <h3>Dribbble</h3>
+        <p>$100</p>
+      </div>
+      <div class="giftcard netflix" data-brand="Netflix" data-price="100" data-color="#808080">
+        <div class="icon">
+          <img src="netflix-1-logo.svg" alt="Netflix Logo" style="width: 2.5rem; height: 2.5rem;" />
+        </div>
+        <h3>Netflix</h3>
+        <p>$100</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="giftcard-overlay" id="overlay">
+    <div class="giftcard-modal">
+      <button class="close-btn" onclick="closeOverlay()">×</button>
+      <div id="modalCard" class="giftcard-card">
+        <div class="icon" id="modalIcon">💳</div>
+        <h3 id="modalTitle">Giftcard</h3>
+        <p id="modalPrice">$100</p>
+      </div>
+      <p class="modal-label">Select size</p>
+      <div class="quantity">
+        <button onclick="adjustQuantity(-1)">−</button>
+        <span id="quantityDisplay">$100</span>
+        <button onclick="adjustQuantity(1)">+</button>
+      </div>
+      <button class="buy-btn" onclick="showSuccess()">Buy</button>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById("overlay");
+    const modalCard = document.getElementById("modalCard");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalPrice = document.getElementById("modalPrice");
+    const modalIcon = document.getElementById("modalIcon");
+    const quantityDisplay = document.getElementById("quantityDisplay");
+
+    let basePrice = 100;
+    let currentQuantity = 1;
+
+    function openOverlay(card) {
+      const brand = card.dataset.brand;
+      const price = card.dataset.price;
+      const color = card.dataset.color;
+      const icon = card.querySelector(".icon").textContent;
+
+      basePrice = parseInt(price);
+      currentQuantity = 1;
+
+      modalCard.style.backgroundColor = color;
+      modalTitle.textContent = brand;
+      modalPrice.textContent = `$${price}`;
+      modalIcon.textContent = icon;
+      quantityDisplay.textContent = `$${basePrice * currentQuantity}`;
+
+      overlay.style.display = "flex";
+    }
+
+    function closeOverlay() {
+      overlay.style.display = "none";
+    }
+
+    function adjustQuantity(change) {
+      currentQuantity = Math.max(1, currentQuantity + change);
+      quantityDisplay.textContent = `$${basePrice * currentQuantity}`;
+    }
+
+    function showSuccess() {
+      // Replace modal content with a success message
+      document.querySelector('.giftcard-modal').innerHTML = `
+        <button class="close-btn" onclick="closeOverlay()">×</button>
+        <div style="padding:2rem 0;">
+          <h2 style="color:#3c332a;">Success!</h2>
+          <p>Your gift card has been bought successfully.</p>
+          <button class="buy-btn" onclick="closeOverlay()">Close</button>
+        </div>
+      `;
+    }
+
+    document.querySelectorAll(".giftcard").forEach((card) => {
+      card.addEventListener("click", () => openOverlay(card));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payments - Vidaripay</title>
+  <link rel="stylesheet" href="paymentstyle.css"/>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <img src="logo-transparent.png" alt="Vidaripay Logo" class="logo" />
+      <h2>Payments</h2>
+      <nav>
+        <a href="#" class="active">Home</a>
+        <a href="giftcard.html">GiftCard</a>
+        <a href="airtime.html">Airtime</a>
+      </nav>
+      <button class="get-started">Get Started</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <input type="text" placeholder="search a feature or a sub-features" />
+        <div class="country-flag">🇷🇼 ⌄</div>
+      </header>
+
+      <section class="welcome-section">
+        <h1>Ready to have some Cool and fast payments across borders</h1>
+        <button class="btn-yellow" id="open-payment">Make a Payment</button>
+      </section>
+
+      <footer class="footer-note">
+        <p>Helpful articles</p>
+        <hr />
+      </footer>
+    </main>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="payment-modal">
+      <div class="payment-form">
+        <h2>New Payment</h2>
+        <label for="amount"><strong>AMOUNT</strong></label>
+        <input type="number" id="amount" placeholder="Enter amount" />
+
+        <h3>Payment method</h3>
+        <label class="payment-option">
+          <input type="radio" name="method" value="credit card" /> credit card
+        </label>
+        <label class="payment-option">
+          <input type="radio" name="method" value="Mobile Money" /> Mobile Money
+        </label>
+        <label class="payment-option">
+          <input type="radio" name="method" value="Bank Transfer" /> Bank Transfer
+        </label>
+        <label class="payment-option">
+          <input type="radio" name="method" value="Digital Wallet" /> Digital Wallet
+        </label>
+
+        <!-- Number input for payment method, hidden by default -->
+        <div id="number-field" style="display:none; margin-top:10px;">
+          <label for="method-number"><strong>Number</strong></label>
+          <input type="text" id="method-number" placeholder="Enter number" />
+        </div>
+
+        <button class="btn-green" id="pay-btn">Pay</button>
+        <!-- Success message, hidden by default -->
+        <div id="success-message" style="display:none; color:green; margin-top:10px;">
+          Payment successful!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("open-payment").onclick = () => {
+      document.getElementById("payment-modal").style.display = "flex";
+      document.getElementById("success-message").style.display = "none";
+    };
+
+    document.getElementById("payment-modal").onclick = (e) => {
+      if (e.target.id === "payment-modal") {
+        document.getElementById("payment-modal").style.display = "none";
+      }
+    };
+
+    // Show number field when a payment method is selected
+    document.querySelectorAll('input[name="method"]').forEach((el) => {
+      el.addEventListener("change", () => {
+        document.getElementById("number-field").style.display = "block";
+      });
+    });
+
+    // Show success message on Pay
+    document.getElementById("pay-btn").onclick = (e) => {
+      e.preventDefault();
+      document.getElementById("success-message").style.display = "block";
+    };
+  </script>
+</body>
+</html>
